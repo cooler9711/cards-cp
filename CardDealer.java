@@ -99,16 +99,9 @@ public class CardDealer{
   System.out.println(deck);
   
   Scanner option=new Scanner (System.in);
-  //System.out.println("How many cards do you want to deal out?");//for console prompt
-  String dealOut=(String)JOptionPane.showInputDialog(null,"Number of cards to deal:",
-                              "CARD DEALER",
-                          JOptionPane.PLAIN_MESSAGE,null,
-                          null,null);
-  int deal=Integer.parseInt(dealOut);
-  //int dealOut=option.nextInt();//for console prompt
 
   
-selectCards(deal,deck, myHand, computerHand);
+selectCards(7,deck, myHand, computerHand);
 
 //the cards are dealt out
 
