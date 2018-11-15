@@ -1,26 +1,3 @@
-/*******************************
-Card Dealer
-JAVA SWING/AWT/JOPTIONPANE Version.
-Created by Mr. Perrine
-February 12, 2017
-********************************/
-
-/*******************************
-Card Dealer deals out the number
-of cards determined by you. The cards
-are either dealt out on separate 
-dialog panes and/or all the cards are 
-displayed on a single pane. A single 
-sound file, shuffling, is also included.
-The console also shows the cards,
-values and status of the arrays. Only
-the player's hand is dealt out, but 
-with some modifications, this engine
-can be entirely GUI-based and used as 
-the precursor to any card game. 
-See version CardDealerJFX for JavaFX version.
-********************************/
-
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +26,7 @@ public class CardDealer {
         }
         System.out.println(deck);
 
-        //Scanner option = new Scanner(System.in);
+        // Scanner option = new Scanner(System.in);
 
         selectCards(7, deck, myHand, computerHand);
 
@@ -60,8 +37,6 @@ public class CardDealer {
     public static void selectCards(int dealOut, ArrayList<String> deck, ArrayList<String> myHand,
             ArrayList<String> computerHand) {
 
-        int PTotal = 0; // initializes total points of cards by value
-        int cPTotal = 0;
         for (int numCards = 0; numCards < dealOut; numCards++) {// loops the number of times you wanted dealt
             int n = numCards + 1;// increments the title of each card by 1
             Collections.shuffle(deck);
@@ -71,59 +46,23 @@ public class CardDealer {
             System.out.println("Your cards are: " + deck.get(numCards).split(":")[0]);
             System.out.println("The Computer's cards are: " + deck.get(numCards).split(":")[0]);
 
-            /**************************************************************/
-            /*********** DISPLAYS EACH CARD ON SEPARATE WINDOWS *************/
-            /**************************************************************/
-
-            // ImageIcon icon=new
-            // ImageIcon(CardGameEnginePLUSPLUS.class.getResource("/cards/"+deck.get(numCards).split(":")[0]+".gif"));
-            //
-            // JLabel label=new JLabel(icon);
-            //
-            //
-            // JDialog dialog=new JDialog();
-            // //dialog.setUndecorated(true);
-            // dialog.getRootPane().setOpaque(false);
-            // dialog.setTitle("Card "+n);
-            // dialog.add(label);
-            // dialog.setSize(125,150);
-            // dialog.setModal(false);
-            // dialog.setVisible(true);
-            /**************************************************************/
-
             myHand.add(deck.get(numCards));
-            PTotal = PTotal + Integer.parseInt(deck.get(numCards).split(":")[1]);// adds up the total of the cards dealt
-                                                                                 // out
             deck.remove(deck.get(numCards));
-
             computerHand.add(deck.get(numCards));
-            cPTotal = cPTotal + Integer.parseInt(deck.get(numCards).split(":")[1]);// adds up the total of the cards
-                                                                                   // dealt out
             deck.remove(deck.get(numCards));
 
             n++;// increments n to the next value
 
-        } // END OF FOR LOOP
+        }
         System.out.println(myHand);
-
-        System.out.println(PTotal);
-        System.out.println(deck);
-
         System.out.println(computerHand);
-
-        System.out.println(cPTotal);
         System.out.println(deck);
-
-        /**************************************************************/
-        /*************** DISPLAYS ALL CARDS ON SINGLE WINDOW *************/
-        /**************************************************************/
 
         JPanel panel = new JPanel();
 
         for (String u : myHand) {
             ImageIcon icon = new ImageIcon(CardDealer.class.getResource("./cards_gifs/" + u.split(":")[0] + ".gif"));
             panel.add(new JLabel(icon));
-
         }
 
         ImageIcon sep = new ImageIcon(CardDealer.class.getResource("./separator.gif"));
@@ -132,11 +71,8 @@ public class CardDealer {
         for (String u : computerHand) {
             ImageIcon icon = new ImageIcon(CardDealer.class.getResource("./cards_gifs/" + u.split(":")[0] + ".gif"));
             panel.add(new JLabel(icon));
-
         }
 
-        JOptionPane.showMessageDialog(null, panel, "My Hand | Computer Hand", JOptionPane.PLAIN_MESSAGE, null);
-
-        /**************************************************************/
-    }// END OF METHOD
+        JOptionPane.showMessageDialog(null, panel, "Your hand!", JOptionPane.PLAIN_MESSAGE, null);
+    }
 }
