@@ -16,7 +16,7 @@ public class CardDealer {
                 "8S:8", "9S:9", "10S:10", "JS:10", "QS:10", "KS:10", "AceC:1:10", "2C:2", "3C:3", "4C:4", "5C:5",
                 "6C:6", "7C:7", "8C:8", "9C:9", "10C:10", "JC:10", "QC:10", "KC:10" };// add Jokers if needed
         ArrayList<String> myHand = new ArrayList<String>();
-        ArrayList<String> computerHand = new ArrayList<String>();
+        ArrayList<String> compHand = new ArrayList<String>();
 
         // added each card to an array list
 
@@ -28,14 +28,14 @@ public class CardDealer {
 
         // Scanner option = new Scanner(System.in);
 
-        selectCards(7, deck, myHand, computerHand);
+        selectCards(7, deck, myHand, compHand);
 
         // the cards are dealt out
 
     }
 
     public static void selectCards(int dealOut, ArrayList<String> deck, ArrayList<String> myHand,
-            ArrayList<String> computerHand) {
+            ArrayList<String> compHand) {
 
         for (int numCards = 0; numCards < dealOut; numCards++) {// loops the number of times you wanted dealt
             int n = numCards + 1;// increments the title of each card by 1
@@ -48,14 +48,14 @@ public class CardDealer {
 
             myHand.add(deck.get(numCards));
             deck.remove(deck.get(numCards));
-            computerHand.add(deck.get(numCards));
+            compHand.add(deck.get(numCards));
             deck.remove(deck.get(numCards));
 
             n++;// increments n to the next value
 
         }
         System.out.println(myHand);
-        System.out.println(computerHand);
+        System.out.println(compHand);
         System.out.println(deck);
 
         JPanel panel = new JPanel();
@@ -65,14 +65,24 @@ public class CardDealer {
             panel.add(new JLabel(icon));
         }
 
-        ImageIcon sep = new ImageIcon(CardDealer.class.getResource("./separator.gif"));
-        panel.add(new JLabel(sep));
+        Object[] opts = { "ask for cards", "put down cards" };
 
-        for (String u : computerHand) {
-            ImageIcon icon = new ImageIcon(CardDealer.class.getResource("./cards_gifs/" + u.split(":")[0] + ".gif"));
-            panel.add(new JLabel(icon));
+        while (compHand.size() > 0 | myHand.size() > 0) {
+
+            int cho = JOptionPane.showOptionDialog(null, panel, "go fish~~", JOptionPane.PLAIN_MESSAGE,
+                    JOptionPane.PLAIN_MESSAGE, null, opts, opts[0]);
+            if (cho == 0) {
+                JOptionPane.showInputDialog(null,
+                        "what card do you want to ask for? \n"
+                                + "(do jk, qn, kn, and a for jack, queen, king, and ace, respectively.",
+                        "ask for card", JOptionPane.PLAIN_MESSAGE, null, null, null);
+            }
         }
+    }
 
-        JOptionPane.showMessageDialog(null, panel, "Your hand!", JOptionPane.PLAIN_MESSAGE, null);
+    public static void drawCard(ArrayList<String> deck, ArrayList<String> hand) {
+        Collections.shuffle(deck);
+        hand.add(deck.get(0));
+        deck.remove(deck.get(0));
     }
 }
