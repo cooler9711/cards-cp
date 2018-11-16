@@ -10,11 +10,10 @@ public class CardDealer {
 
         // Scanner kb = new Scanner(System.in); //for console
 
-        String[] cards = { "AceH:1:10", "2H:2", "3H:3", "4H:4", "5H:5", "6H:6", "7H:7", "8H:8", "9H:9", "10H:10",
-                "JH:10", "QH:10", "KH:10", "AceD:1:10", "2D:2", "3D:3", "4D:4", "5D:5", "6D:6", "7D:7", "8D:8", "9D:9",
-                "10D:10", "JD:10", "QD:10", "KD:10", "AceS:1:10", "2S:2", "3S:3", "4S:4", "5S:5", "6S:7", "7S:7",
-                "8S:8", "9S:9", "10S:10", "JS:10", "QS:10", "KS:10", "AceC:1:10", "2C:2", "3C:3", "4C:4", "5C:5",
-                "6C:6", "7C:7", "8C:8", "9C:9", "10C:10", "JC:10", "QC:10", "KC:10" };// add Jokers if needed
+        String[] cards = { "AceH", "2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AceD",
+                "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AceS", "2S", "3S", "4S", "5S",
+                "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AceC", "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C",
+                "10C", "JC", "QC", "KC" };// add Jokers if needed
         ArrayList<String> myHand = new ArrayList<String>();
         ArrayList<String> compHand = new ArrayList<String>();
 
@@ -74,8 +73,13 @@ public class CardDealer {
             if (cho == 0) {
                 JOptionPane.showInputDialog(null,
                         "what card do you want to ask for? \n"
-                                + "(do jk, qn, kn, and a for jack, queen, king, and ace, respectively.",
+                                + "(do jk, qn, kn, and a for jack, queen, king, and ace, respectively.)",
                         "ask for card", JOptionPane.PLAIN_MESSAGE, null, null, null);
+            } else if (cho == 1) {
+                JOptionPane.showInputDialog(null,
+                        "what cards do you want to put down? \n"
+                                + "(do jk, qn, kn, and a for jack, queen, king, and ace, respectively.)",
+                        "put down cards", JOptionPane.PLAIN_MESSAGE, null, null, null);
             }
         }
     }
@@ -84,5 +88,24 @@ public class CardDealer {
         Collections.shuffle(deck);
         hand.add(deck.get(0));
         deck.remove(deck.get(0));
+    }
+
+    public static void checkCompDeck(String cName) {
+        boolean isAce;
+        boolean isSpecial;
+        try {
+            Integer.parseInt((String) cName.charAt(0));
+            isSpecial = false;
+        } catch (Exception ex) {
+            isSpecial = true;
+            try {
+                if (cName.charAt(2) == "e")
+                    isAce = true;
+                else
+                    isAce = false;
+            } catch (Exception e) {
+
+            }
+        }
     }
 }
