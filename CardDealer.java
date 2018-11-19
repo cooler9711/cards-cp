@@ -27,13 +27,13 @@ public class CardDealer {
 
         // Scanner option = new Scanner(System.in);
 
-        selectCards(7, deck, myHand, compHand);
+        startGame(7, deck, myHand, compHand);
 
         // the cards are dealt out
 
     }
 
-    public static void selectCards(int dealOut, ArrayList<String> deck, ArrayList<String> myHand,
+    public static void startGame(int dealOut, ArrayList<String> deck, ArrayList<String> myHand,
             ArrayList<String> compHand) {
 
         for (int numCards = 0; numCards < dealOut; numCards++) {// loops the number of times you wanted dealt
@@ -84,10 +84,11 @@ public class CardDealer {
         }
     }
 
-    public static void drawCard(ArrayList<String> deck, ArrayList<String> hand) {
+    public static String drawCard(ArrayList<String> deck, ArrayList<String> hand) {
         Collections.shuffle(deck);
         hand.add(deck.get(0));
         deck.remove(deck.get(0));
+        return deck;
     }
 
     public static void checkCompDeck(String cName) {
@@ -98,14 +99,10 @@ public class CardDealer {
             isSpecial = false;
         } catch (Exception ex) {
             isSpecial = true;
-            try {
-                if (cName.charAt(2) == "e")
-                    isAce = true;
-                else
-                    isAce = false;
-            } catch (Exception e) {
-
-            }
+            if (cName.charAt(2) == "e")
+                isAce = true;
+            else
+                isAce = false;
         }
     }
 }
