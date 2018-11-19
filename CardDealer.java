@@ -84,7 +84,7 @@ public class CardDealer {
         }
     }
 
-    public static String drawCard(ArrayList<String> deck, ArrayList<String> hand) {
+    public static ArrayList<String> drawCard(ArrayList<String> deck, ArrayList<String> hand) {
         Collections.shuffle(deck);
         hand.add(deck.get(0));
         deck.remove(deck.get(0));
