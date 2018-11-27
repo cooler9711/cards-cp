@@ -1,10 +1,13 @@
 import java.util.*;
 import javax.swing.*;
+
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
+
 import java.awt.*;
 import sun.audio.*;
 import java.io.*;
 
-public class CardDealer {
+public class goFish {
 
     public static void main(String args[]) throws Exception {
 
@@ -60,7 +63,7 @@ public class CardDealer {
         JPanel panel = new JPanel();
 
         for (String u : myHand) {
-            ImageIcon icon = new ImageIcon(CardDealer.class.getResource("./cards_gifs/" + u.split(":")[0] + ".gif"));
+            ImageIcon icon = new ImageIcon(goFish.class.getResource("./cards_gifs/" + u.split(":")[0] + ".gif"));
             panel.add(new JLabel(icon));
         }
 
@@ -92,17 +95,19 @@ public class CardDealer {
     }
 
     public static void checkCompDeck(String cName) {
-        boolean isAce;
-        boolean isSpecial;
+        boolean isAce = false;
+        boolean isJack = false;
+        boolean isQueen = false;
+        boolean isKing = false;
+        boolean isSpecial = false;
         try {
-            Integer.parseInt((String) cName.charAt(0));
-            isSpecial = false;
+            int fNum = Integer.parseInt(Character.toString(cName.charAt(0)));
+            // if this fails, that means that the card is a special card, aka a card that is
+            // not normally a number, and it moves on to the catch statement.
         } catch (Exception ex) {
             isSpecial = true;
-            if (cName.charAt(2) == "e")
-                isAce = true;
-            else
-                isAce = false;
+            
         }
+
     }
 }
