@@ -1,8 +1,5 @@
 import java.util.*;
 import javax.swing.*;
-
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
-
 import java.awt.*;
 import sun.audio.*;
 import java.io.*;
@@ -106,8 +103,17 @@ public class goFish {
             // not normally a number, and it moves on to the catch statement.
         } catch (Exception ex) {
             isSpecial = true;
-            
+            switch (cName.charAt(0)) {
+            case 'A':
+                isAce = true;
+            case 'J':
+                isJack = true;
+            case 'Q':
+                isQueen = true;
+            case 'K':
+                isKing = true;
+            }
         }
-
+        
     }
 }
