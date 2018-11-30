@@ -13,7 +13,7 @@ public class goFish {
         String[] cards = { "AceB", "2B", "3B", "4B", "5B", "6B", "7B", "8B", "9B", "10B", "JH", "QH", "KH", "AceD",
                 "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AceS", "2S", "3S", "4S", "5S",
                 "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AceC", "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C",
-                "10C", "JC", "QC", "KC" };//No Jokers needed
+                "10C", "JC", "QC", "KC" };// No Jokers needed
         ArrayList<String> myHand = new ArrayList<String>();
         ArrayList<String> compHand = new ArrayList<String>();
 
@@ -36,7 +36,7 @@ public class goFish {
     public static void startGame(int dealOut, ArrayList<String> deck, ArrayList<String> myHand,
             ArrayList<String> compHand) throws Exception {
 
-         for (int numCards = 0; numCards < dealOut; numCards++) {// loops the number of times you wanted dealt
+        for (int numCards = 0; numCards < dealOut; numCards++) {// loops the number of times you wanted dealt
             int n = numCards + 1;// increments the title of each card by 1
             Collections.shuffle(deck);
             // int deal = new Random().nextInt(deck.size() - 1); //randomly selects the
@@ -58,34 +58,34 @@ public class goFish {
         System.out.println(deck);
 
         JPanel panel = new JPanel();
-         JFrame frame = new JFrame();
+        JFrame frame = new JFrame();
         ImageIcon instructions = new ImageIcon("images/LilFish.png");
-       JOptionPane.showMessageDialog(frame, null , "Rewls ov de gaim", JOptionPane.INFORMATION_MESSAGE, instructions);
+        JOptionPane.showMessageDialog(frame, null, "Rewls ov de gaim", JOptionPane.INFORMATION_MESSAGE, instructions);
         for (String u : myHand) {
             ImageIcon icon = new ImageIcon(goFish.class.getResource("./cards_gifs/" + u.split(":")[0] + ".gif"));
             panel.add(new JLabel(icon));
         }
 
-        Object[] opts = { "Ask for cards", "Put down cards","Exit" };
+        Object[] opts = { "Ask for cards", "Put down cards", "Exit" };
 
         while (compHand.size() > 0 | myHand.size() > 0) {
 
             int cho = JOptionPane.showOptionDialog(null, panel, "go fish~~", JOptionPane.PLAIN_MESSAGE,
                     JOptionPane.PLAIN_MESSAGE, null, opts, opts[0]);
             if (cho == 0) {
-                String response=(String)JOptionPane.showInputDialog(null,
+                String response = (String) JOptionPane.showInputDialog(null,
                         "What card do you want to ask for? \n"
                                 + "(Insert jk, qn, kn, and a for Jack, Queen, King, and Ace, respectively.)",
                         "Ask for card", JOptionPane.PLAIN_MESSAGE, null, null, null);
-                        System.out.print(response);
+                System.out.print(response);
             } else if (cho == 1) {
-                String response=(String)JOptionPane.showInputDialog(null,
+                String response = (String) JOptionPane.showInputDialog(null,
                         "What cards do you want to put down? \n"
                                 + "(Insert jk, qn, kn, and a for Jack, Queen, King, and Ace, respectively.)",
                         "Put down cards", JOptionPane.PLAIN_MESSAGE, null, null, null);
-                        System.out.print(response);
+                System.out.print(response);
             } else if (cho == 2) {
-               System.exit(0);
+                System.exit(0);
             }
         }
     }
@@ -97,7 +97,7 @@ public class goFish {
         return deck;
     }
 
-    public static void checkCompDeck(String cName) throws Exception {
+    public static void checkDeck(String cName, ArrayList<String> srcDesk, ArrayList<String> destDeck) throws Exception {
         boolean isAce = false;
         boolean isJack = false;
         boolean isQueen = false;
@@ -109,17 +109,18 @@ public class goFish {
             // not normally a number, and it moves on to the catch statement.
         } catch (Exception ex) {
             isSpecial = true;
-            switch (cName.charAt(0)) {
-            case 'A':
-                isAce = true;
-            case 'J':
-                isJack = true;
-            case 'Q':
-                isQueen = true;
-            case 'K':
-                isKing = true;
+            /*
+             * switch (cName.charAt(0)) { case 'A': isAce = true; case 'J': isJack = true;
+             * case 'Q': isQueen = true; case 'K': isKing = true; }
+             */
+        }
+        for (int i = 0; i < srcDesk.size(); i++) {
+            if (!isSpecial) {
+                if (srcDesk.get(i).contains(fNum)) {
+                    destDeck.add(srcDeck.get(i));
+                    srcDeck.remove(i);
+                }
             }
         }
-        
     }
 }
