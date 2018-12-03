@@ -208,4 +208,49 @@ public class goFish {
             System.out.println(myLay);
         }
     }
+
+    public static void compTurn() throws Exception {
+        boolean hasCard = false;
+        Random rand = new Random();
+        int arrySpot = rand.nextInt(compHand.size());
+        String cName = Character.toString(compHand.get(arrySpot).charAt(0));
+
+
+        try {
+            int fNum = Integer.parseInt(cName);
+            System.out.println(" isn't a special card");
+            // if this fails, that means that the card is a special card, aka a card that is
+            // not normally a number, and it moves on to the catch statement.
+            for (int i = 0; i < myHand.size(); i++) {
+                if (myHand.get(i).contains(Integer.toString(fNum))) {
+                    hasCard = true;
+                    compHand.add(myHand.get(i));
+                    System.out.println("added the card " + myHand.get(i));
+                    myHand.remove(i);
+                    i = i - 1;
+                }
+                System.out.println(myHand);
+            }
+        } catch (Exception ex) {
+            System.out.println(" caught with exception " + ex);
+            for (int i = 0; i < myHand.size(); i++) {
+                if (myHand.get(i).contains(cName)) {
+                    hasCard = true;
+                    System.out.println("in loop with index of " + i);
+                    compHand.add(myHand.get(i));
+                    myHand.remove(i);
+                    i = i - 1;
+                }
+            }
+            System.out.println(myHand);
+        }
+        if (!hasCard) {
+            JFrame frame = new JFrame();
+            compHand.add(deck.get(0));
+            deck.remove(0);
+            System.out.println(compHand);
+            JOptionPane.showMessageDialog(frame, "you didn't have the card the computer asked for, so it drew a card.",
+                    "You say Go Fish!", JOptionPane.INFORMATION_MESSAGE, null);
+        }
+    }
 }
