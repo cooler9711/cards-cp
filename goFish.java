@@ -151,6 +151,7 @@ public class goFish {
                     myHand.add(compHand.get(i));
                     System.out.println("added the card " + compHand.get(i));
                     compHand.remove(i);
+                    i = i - 1;
                 }
                 System.out.println(compHand);
             }
@@ -161,6 +162,7 @@ public class goFish {
                     System.out.println("in loop with index of " + i);
                     myHand.add(compHand.get(i));
                     compHand.remove(i);
+                    i = i - 1;
                 }
             }
             System.out.println(compHand);
@@ -178,6 +180,7 @@ public class goFish {
                     myLay.add(myHand.get(i));
                     System.out.println("added the card " + myHand.get(i));
                     myHand.remove(i);
+                    i = i - 1;
                 }
             }
             System.out.println(myLay);
@@ -188,6 +191,7 @@ public class goFish {
                     System.out.println("in loop with index of " + i);
                     myLay.add(myHand.get(i));
                     myHand.remove(i);
+                    i = i - 1;
                 }
             }
             System.out.println(myLay);
