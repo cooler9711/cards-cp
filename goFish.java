@@ -41,7 +41,7 @@ public class goFish {
     public static void startGame(int dealOut) throws Exception {
 
         for (int numCards = 0; numCards < dealOut; numCards++) {// loops the number of times you wanted dealt
-            int n = numCards + 1;// increments the title of each card by 1
+            // int n = numCards + 1;// increments the title of each card by 1
             Collections.shuffle(deck);
             // int deal = new Random().nextInt(deck.size() - 1); //randomly selects the
             // index of the deck array using randomizer
@@ -54,7 +54,7 @@ public class goFish {
             System.out.println("The Computer's cards are: " + deck.get(numCards).split(":")[0]);
             deck.remove(deck.get(numCards));
 
-            n++;// increments n to the next value
+            // n++;// increments n to the next value
 
         }
         System.out.println(myHand);
@@ -76,13 +76,13 @@ public class goFish {
             JPanel panel = new JPanel();
 
             for (String u : myHand) {
-                ImageIcon icon = new ImageIcon(goFish.class.getResource("./cards_pngs/" + u.split(":")[0] + ".png"));
+                ImageIcon icon = new ImageIcon(goFish.class.getResource("./cards/" + u.split(":")[0] + ".png"));
                 panel.add(new JLabel(icon));
             }
             ImageIcon sep = new ImageIcon(goFish.class.getResource("./separator.gif"));
             panel.add(new JLabel(sep));
             for (String u : myLay) {
-                ImageIcon icon = new ImageIcon(goFish.class.getResource("./cards_pngs/" + u.split(":")[0] + ".png"));
+                ImageIcon icon = new ImageIcon(goFish.class.getResource("./cards/" + u.split(":")[0] + ".png"));
                 panel.add(new JLabel(icon));
             }
 
@@ -111,7 +111,7 @@ public class goFish {
                 Thread.sleep(0);
                 String response = (String) JOptionPane.showInputDialog(null,
                         "What cards do you want to put down? \n"
-                                + "(Insert jk, qn, kn, and a for Jack, Queen, King, and Ace, respectively.)",
+                                + "(Insert J, Q, K, and A for Jack, Queen, King, and Ace, respectively.)",
                         "Put down cards", JOptionPane.PLAIN_MESSAGE, null, null, null);
                 if (response != null) {
                     System.out.print(response);
@@ -141,6 +141,7 @@ public class goFish {
     }
 
     public static void pullFromCompDeck(String cName) throws Exception {
+        boolean hasCard = false;
         try {
             int fNum = Integer.parseInt(cName);
             System.out.println(" isn't a special card");
@@ -148,6 +149,7 @@ public class goFish {
             // not normally a number, and it moves on to the catch statement.
             for (int i = 0; i < compHand.size(); i++) {
                 if (compHand.get(i).contains(Integer.toString(fNum))) {
+                    hasCard = true;
                     myHand.add(compHand.get(i));
                     System.out.println("added the card " + compHand.get(i));
                     compHand.remove(i);
@@ -159,6 +161,7 @@ public class goFish {
             System.out.println(" caught with exception " + ex);
             for (int i = 0; i < compHand.size(); i++) {
                 if (compHand.get(i).contains(cName)) {
+                    hasCard = true;
                     System.out.println("in loop with index of " + i);
                     myHand.add(compHand.get(i));
                     compHand.remove(i);
@@ -166,6 +169,14 @@ public class goFish {
                 }
             }
             System.out.println(compHand);
+        }
+        if (!hasCard) {
+            JFrame frame = new JFrame();
+            myHand.add(deck.get(0));
+            deck.remove(0);
+            System.out.println(myHand);
+            JOptionPane.showMessageDialog(frame, "The computer didn't have the card you asked for, so you drew a card.",
+                    "Computer says Go Fish!", JOptionPane.INFORMATION_MESSAGE, null);
         }
     }
 
