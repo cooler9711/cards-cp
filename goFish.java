@@ -101,6 +101,7 @@ public class goFish {
                 if (response != null) {
                     System.out.print(response);
                     pullFromCompDeck(response);
+                    compTurn();
                 }
 
             } else if (cho == 1) {
@@ -117,6 +118,7 @@ public class goFish {
                     System.out.print(response);
                     putDownMyCards(response);
                 }
+
             } else if (cho == 2) {
                 AudioInputStream input2 = AudioSystem.getAudioInputStream(new File("sounds/ClickSound.wav"));
                 Clip clip2 = AudioSystem.getClip();
@@ -125,6 +127,13 @@ public class goFish {
                 Thread.sleep(0);
                 System.exit(0);
             }
+        }
+        if (compHand.size() == 0) {
+            JOptionPane.showMessageDialog(frame, "Computer ran out of cards!", "You Win!!",
+                    JOptionPane.INFORMATION_MESSAGE, null);
+        } else {
+            JOptionPane.showMessageDialog(frame, "You ran out of cards!", "You Lose!!", JOptionPane.INFORMATION_MESSAGE,
+                    null);
         }
     }
 
@@ -177,6 +186,9 @@ public class goFish {
             System.out.println(myHand);
             JOptionPane.showMessageDialog(frame, "The computer didn't have the card you asked for, so you drew a card.",
                     "Computer says Go Fish!", JOptionPane.INFORMATION_MESSAGE, null);
+        } else {
+            JOptionPane.showMessageDialog(frame, "You took computer's " + cName + " cards!", "You took cards",
+                    JOptionPane.INFORMATION_MESSAGE, null);
         }
     }
 
@@ -215,7 +227,6 @@ public class goFish {
         int arrySpot = rand.nextInt(compHand.size());
         String cName = Character.toString(compHand.get(arrySpot).charAt(0));
 
-
         try {
             int fNum = Integer.parseInt(cName);
             System.out.println(" isn't a special card");
@@ -251,6 +262,9 @@ public class goFish {
             System.out.println(compHand);
             JOptionPane.showMessageDialog(frame, "you didn't have the card the computer asked for, so it drew a card.",
                     "You say Go Fish!", JOptionPane.INFORMATION_MESSAGE, null);
+        } else {
+            JOptionPane.showMessageDialog(frame, "Computer took your " + cName + " cards!", "Computer took cards",
+                    JOptionPane.INFORMATION_MESSAGE, null);
         }
     }
 }
